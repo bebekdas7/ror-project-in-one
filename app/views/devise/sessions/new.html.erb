@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    /* styling navbar */
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap');
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.var {
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.kan {
+    font-family: "Kanit", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 6rem;
+}
+
+.primary-btn{
+    border: none;
+    background: #e9fff0;
+    padding: 0.7rem 2rem;
+    border-radius: 50px;
+}
+.mons{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+  }
+
+.input{
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    outline: none;
+    width: 70%;
+    border-radius: 20px;
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 0.9rem;
+    color: black;
+}
+.secondary-btn{
+    border: none;
+    background: #243642;
+    color: white;
+    width: 70%;
+    border-radius: 20px;
+    height: 2.5rem;
+    margin-top: 2rem;
+}
+
+.navbar{
+    /* border: 1px solid black; */
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: #E2F1E7;
+}
+.nav-logo{
+    /* border: 1px solid green; */
+    width: 10%;
+    height: 100%;
+}
+.nav-items {
+    /* border: 1px solid orange; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 30%;
+    height: 100%;
+}
+
+.nav-items a {
+    text-decoration: none;
+    color: #243642;
+    font-size: 1.1rem;
+    transition: transform 0.15s ease-in-out;
+}
+
+.nav-items a:hover {
+    transform: scale(1.15);
+}
+
+
+    /* Styling for the form container */
+    .login-form-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    /* Styling for each form field */
+    .login-form-container .field {
+      margin-bottom: 15px;
+    }
+
+    /* Styling for labels */
+    .login-form-container label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    /* Styling for input fields */
+    .login-form-container input[type="email"],
+    .login-form-container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    /* Styling for the remember me checkbox */
+    .login-form-container .field input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    /* Styling for the submit button */
+    .login-form-container .actions input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .login-form-container .actions input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    /* Styling for the shared Devise links */
+    .login-form-container .devise-links {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .login-form-container .devise-links a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .login-form-container .devise-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <% if notice %>
+    <div class="alert alert-notice" style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="alert alert-warning" style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+      <%= alert %>
+    </div>
+  <% end %>
+  
+  <div class="login-form-container">
+    <h2 class="mons">Log in</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+
+    <div class="devise-links">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</body>
+</html>

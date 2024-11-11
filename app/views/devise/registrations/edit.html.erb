@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Account</title>
+    <style>
+      /* styling navbar */
+      @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Varela+Round&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap");
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      .var {
+        font-family: "Varela Round", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+      .kan {
+        font-family: "Kanit", sans-serif;
+        font-weight: 800;
+        font-style: normal;
+        font-size: 6rem;
+      }
+
+      .primary-btn {
+        border: none;
+        background: #e9fff0;
+        padding: 0.7rem 2rem;
+        border-radius: 50px;
+      }
+      .mons {
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+      }
+
+      .input {
+        border: 1px solid black;
+        margin-bottom: 1rem;
+        outline: none;
+        width: 70%;
+        border-radius: 20px;
+        height: 2.5rem;
+        padding: 0 1rem;
+        font-size: 0.9rem;
+        color: black;
+      }
+      .secondary-btn {
+        border: none;
+        background: #243642;
+        color: white;
+        width: 70%;
+        border-radius: 20px;
+        height: 2.5rem;
+        margin-top: 2rem;
+      }
+
+      .navbar {
+        /* border: 1px solid black; */
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        background: #e2f1e7;
+      }
+      .nav-logo {
+        /* border: 1px solid green; */
+        width: 10%;
+        height: 100%;
+      }
+      .nav-items {
+        /* border: 1px solid orange; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        width: 45%;
+        height: 100%;
+      }
+
+      .nav-items a {
+        text-decoration: none;
+        color: #243642;
+        font-size: 1.1rem;
+        transition: transform 0.15s ease-in-out;
+      }
+
+      .nav-items a:hover {
+        transform: scale(1.15);
+      }
+
+      /* Container styling for the form */
+      .edit-form-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+
+      /* Styling for form field elements */
+      .edit-form-container .field {
+        margin-bottom: 15px;
+      }
+
+      /* Styling for labels */
+      .edit-form-container label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      /* Styling for input fields */
+      .edit-form-container input[type="email"],
+      .edit-form-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      /* Styling for error messages */
+      .edit-form-container .error-messages {
+        color: red;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+      }
+
+      /* Styling for the submit button */
+      .edit-form-container .actions input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .edit-form-container .actions input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      /* Styling for the "Cancel my account" section */
+      .cancel-account {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .cancel-account button {
+        background-color: #e74c3c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .cancel-account button:hover {
+        background-color: #c0392b;
+      }
+
+      /* Styling for the "Back" link */
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Styling for pending confirmation message */
+      .pending-confirmation {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="edit-form-container">
+      <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+      <%= form_for(resource, as: resource_name, url:
+      registration_path(resource_name), html: { method: :put }) do |f| %>
+      <div class="error-messages">
+        <%= render "devise/shared/error_messages", resource: resource %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div class="pending-confirmation">
+        Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+      </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :password %>
+        <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "new-password" %> <% if
+        @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete:
+        "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :current_password %>
+        <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, autocomplete: "current-password"
+        %>
+      </div>
+
+      <div class="actions"><%= f.submit "Update" %></div>
+      <% end %>
+
+      <div class="cancel-account">
+        <div>
+          Unhappy? <%= button_to "Delete my account",
+          registration_path(resource_name), data: { confirm: "Are you sure?",
+          turbo_confirm: "Are you sure?" }, method: :delete %>
+        </div>
+      </div>
+
+      <a href="javascript:history.back()" class="back-link">Back</a>
+    </div>
+  </body>
+</html>

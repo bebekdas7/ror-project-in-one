@@ -1,0 +1,11 @@
+<% content_for :title, "New chair" %>
+
+<h1>New chair</h1>
+
+<%= render "form", chair: @chair %>
+
+<br>
+
+<div>
+  <%= link_to "Back to chairs", chairs_path %>
+</div>

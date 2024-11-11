@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Project" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "index", "data-turbo-track": "reload" %>
+    <style>
+      .navbar{
+    /* border: 1px solid black; */
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: #E2F1E7;
+}
+.nav-logo{
+    /* border: 1px solid green; */
+    width: 10%;
+    height: 100%;
+}
+.nav-items {
+    /* border: 1px solid orange; */
+    width: 45%;
+    height: 100%;
+}
+
+.nav-items a {
+    text-decoration: none;
+    color: #243642;
+    font-size: 1.1rem;
+    transition: transform 0.15s ease-in-out;
+}
+
+.nav-items a:hover {
+    transform: scale(1.1);
+}
+
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="nav-logo d-flex align-items-center justify-content-center var">
+        <h3 class="mb-0">FURNE-X</h3>
+      </div>
+      <div class="nav-items d-flex align-items-center justify-content-center gap-5">
+        
+        <% if user_signed_in? %>
+          <p></p>
+          <%= link_to "Home", root_path, class: "mons text-dark"%>
+          <%= link_to "Edit profile", edit_user_registration_path, class: "mons text-dark" %>
+          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "mons text-dark" %>
+          <%= link_to "Orders", orders_path, class: "mons text-dark" %> <!-- Add this line -->
+          <%= link_to "Cart", class: "mons text-dark"%>
+          
+        <% else %>
+          <%= link_to "Home", root_path, class: "mons text-dark"%>
+          <%= link_to "Login", new_user_session_path, class: "mons text-dark" %>
+          <%= link_to "Sign up", new_user_registration_path, class: "mons text-dark" %>
+        <% end %>
+      </div>
+    </nav>
+
+ 
+
+    <%= yield %>
+  </body>
+</html>

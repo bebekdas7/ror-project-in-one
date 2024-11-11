@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chair Collection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
+    ">
+
+    <style>
+        /* styling navbar */
+      @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Varela+Round&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap");
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      .var {
+        font-family: "Varela Round", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+      .kan {
+        font-family: "Kanit", sans-serif;
+        font-weight: 800;
+        font-style: normal;
+        font-size: 6rem;
+      }
+
+      .primary-btn {
+        border: none;
+        background: #e9fff0;
+        padding: 0.7rem 2rem;
+        border-radius: 50px;
+      }
+      .mons {
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+      }
+
+      .input {
+        border: 1px solid black;
+        margin-bottom: 1rem;
+        outline: none;
+        width: 70%;
+        border-radius: 20px;
+        height: 2.5rem;
+        padding: 0 1rem;
+        font-size: 0.9rem;
+        color: black;
+      }
+      .secondary-btn {
+        border: none;
+        background: #243642;
+        color: white;
+        width: 70%;
+        border-radius: 20px;
+        height: 2.5rem;
+        margin-top: 2rem;
+      }
+
+      .navbar {
+        /* border: 1px solid black; */
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        background: #e2f1e7;
+      }
+      .nav-logo {
+        /* border: 1px solid green; */
+        width: 10%;
+        height: 100%;
+      }
+      .nav-items {
+        /* border: 1px solid orange; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        width: 45%;
+        height: 100%;
+      }
+
+      .nav-items a {
+        text-decoration: none;
+        color: #243642;
+        font-size: 1.1rem;
+        transition: transform 0.15s ease-in-out;
+      }
+
+      .nav-items a:hover {
+        transform: scale(1.15);
+      }
+
+        /* Sofa Collection */
+        .sofa-banner {
+            height: 30vh;
+            background: #e7e2e2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+        }
+
+        .sofa-banner-header {
+            height: 10vh;
+            width: 20vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sofa-banner-header h2 {
+            font-size: 2.5rem;
+        }
+
+        .sofa-bnaner-image {
+            width: 25vw;
+            height: 80%;
+        }
+
+        .sofa-bnaner-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sofa-filter-section {
+            margin-top: 2rem;
+            height: 9vh;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 15rem;
+        }
+
+        .sofa-listing {
+            padding: 2rem 9rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        /* Card Styling */
+        .card {
+            border: none !important;
+            width: 15rem;
+            height: 45vh !important;
+            display: flex;
+            flex-direction: column;
+            background: #d1cece !important;
+        }
+
+        .card-img {
+            height: 80%;
+            background: transparent;
+        }
+
+        .card-img .img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-details {
+            /* border: 1px solid black; */
+            background: transparent;
+            height: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 0.2rem 0.4rem;
+        }
+
+        .card-details p:nth-child(1) {
+            color: black;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .card-details p:nth-child(2) {
+            color: black;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <main class="collection-main">
+        <!-- Sofa Collection -->
+        <section class="sofa-collection">
+            <div class="sofa-banner">
+                <div class="sofa-banner-header">
+                    <h2 class="mb-0 var">Chair Sets</h2>
+                </div>
+                <div class="sofa-bnaner-image">
+                    <%= image_tag "sofa.avif"%>
+                </div>
+            </div>
+
+            <<div class="sofa-listing">
+                <% @chairs.each do |chair| %>
+                    <%= link_to chair_path(chair) do %>
+                        <div class="card">
+                            <div class="card-img">
+                                <%= image_tag "sofa.avif", class: "img" %>
+                            </div>
+                            <div class="card-details">
+                                <p class="mb-0 mons text-decoration-none"><%= chair.name %></p>
+                                <p class="mb-0 mons"><%= number_to_currency(chair.price) %></p>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+            
+        </section>
+    </main>
+</body>
+</html>
